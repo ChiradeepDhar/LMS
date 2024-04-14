@@ -417,6 +417,9 @@ export const updateProfilePicture =CatchAsyncError(async(req:Request,res:Respons
 
     }
 });
+
+
+// delete account
  
 
 

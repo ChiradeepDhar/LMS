@@ -26,7 +26,7 @@ interface ICourseData extends Document{
     videoSection:string;
     videoLength:number;
     videoPlayer:string;
-    Links:ILink[];
+    links:ILink[];
     suggestion:string;
     questions:IComment[];
 }
@@ -45,7 +45,7 @@ interface ICourse extends Document{
     reviews:IReview[];
     courseData:ICourseData[];
     ratings?:number;
-    purchased:number;
+    purchased?:number;
 
 }
 
@@ -54,7 +54,7 @@ const reviewSchema  =new Schema<IReview>({
     user:Object,
     rating:{
         type:Number,
-        defaukt:0,
+        default:0,
     },
     comment:String,
 });
@@ -77,7 +77,7 @@ const courseDataSchema =new Schema<ICourseData>({
     description:String,
     videoLength:Number,
     videoPlayer:String,
-    Links:[{linkSchema}],
+    links:[{linkSchema}],
     suggestion:String,
     questions:[commentSchema],
 });
@@ -134,6 +134,7 @@ const courseSchema =new Schema<ICourse>({
 
 
 const CourseModel: Model<ICourse> =mongoose.model("Course",courseSchema);
+
 
 export default CourseModel;
 

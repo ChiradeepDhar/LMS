@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 import mongoose,{Document,Model,Schema} from "mongoose";
 import bcrypt from "bcryptjs";
@@ -13,7 +12,7 @@ export interface IUser extends Document{
     avatar:{
         public_id:string;
         url:string;
-    },
+    },    
     role:string;
     isVerified:boolean;
     courses:Array<{courseId: string}>;

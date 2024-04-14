@@ -8,6 +8,7 @@ import {redis} from "../utils/redis";
 
 //authenticated user
 export const isAuthenticated =CatchAsyncError(async(req:Request,res:Response,next:NextFunction) =>{
+    
     const access_token =req.cookies.access_token as string;
 
     if(!access_token){
@@ -15,7 +16,7 @@ export const isAuthenticated =CatchAsyncError(async(req:Request,res:Response,nex
     }
 
     const decoded =jwt.verify(access_token,process.env.ACCESS_TOKEN as string) as JwtPayload;
-
+    
     if(!decoded){
         return next(new ErrorHandler("access token is not valid",400));
     }
@@ -27,6 +28,7 @@ export const isAuthenticated =CatchAsyncError(async(req:Request,res:Response,nex
     }
 
     req.user =JSON.parse(user);
+    
     next();
 
 });
@@ -35,11 +37,13 @@ export const isAuthenticated =CatchAsyncError(async(req:Request,res:Response,nex
 
 //validate user role
 export const authorizeRoles =(...roles:string[]) =>{
+    // console.log("test");
     return (req:Request,res:Response,next:NextFunction) =>{
         if(!roles.includes(req.user?.role || '')){
             return next(new ErrorHandler(`Role: ${req.user?.role} is not allowed to access this resource`,403));
-
         }
+        next();
     }
+    
 }
 
