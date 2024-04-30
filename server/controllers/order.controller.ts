@@ -1,7 +1,7 @@
 import { NextFunction,Request,Response } from "express";
 import { CatchAsyncError } from "../middleware/catchAsyncErrors";
 import ErrorHandler from "../utils/ErrorHandler";
-import OrderModel ,{IOrder} from "../models/orderModel";
+import orderModel ,{IOrder} from "../models/orderModel";
 import userModel from "../models/usermodel";
 import CourseModel from "../models/course.model";
 import path from "path";
