@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { CatchAsyncError } from "../middleware/catchAsyncErrors";
 import ErrorHandler from "../utils/ErrorHandler";
 import cloudinary from "cloudinary";
-import { createCourse } from "../services/course.service";
+import { createCourse, getAllCoursesService } from "../services/course.service";
 import CourseModel from "../models/course.model";
 import { redis } from "../utils/redis";
 import mongoose from "mongoose";
@@ -10,6 +10,7 @@ import ejs from "ejs";
 import path from "path";
 import sendMail from "../utils/sendMail";
 import NotificationModel from "../models/notificationModel";
+
 
 //upload course
 export const uploadCourse = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
@@ -414,6 +415,15 @@ export const addReplyToReview =CatchAsyncError(async(req:Request,res:Response,ne
         return next(new ErrorHandler(error.message,500));
 
     }
-})
+});
 
-  
+// get all courses ---only for admin
+export const getAllUsers= CatchAsyncError(
+    async(req:Request,res:Response,next:NextFunction) => {
+        try{
+            getAllCoursesService(res);
+        }catch(error:any){
+            return next(new ErrorHandler(error.message,400));
+        }
+    }
+);
