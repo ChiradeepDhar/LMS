@@ -11,7 +11,7 @@ import sendMail from "../utils/sendMail";
 import { Error } from "mongoose";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
-import { getAllUsersService, getUserById } from "../services/userservice";
+import { getAllUsersService, getUserById, updateUserRoleService } from "../services/userservice";
 import { stringify } from "querystring";
 
 import cloudinary from "cloudinary";
@@ -430,6 +430,21 @@ export const getAllUsers= CatchAsyncError(
     }
 );
  
+//update user role---only for admin 
+export const updateUserRole =CatchAsyncError(async(req:Request,res:Response,next:NextFunction) =>{
+    try{
+        const {id,role}=req.body;
+        updateUserRoleService(res,id,role);
+
+    }catch(error:any){
+        return next(new ErrorHandler(error.message,400));
+    }
+});
+
+//delete user --- only for admin 
+
+
+
 
 
 
