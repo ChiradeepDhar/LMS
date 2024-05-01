@@ -11,7 +11,7 @@ import sendMail from "../utils/sendMail";
 import { Error } from "mongoose";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
-import { getUserById } from "../services/userservice";
+import { getAllUsersService, getUserById } from "../services/userservice";
 import { stringify } from "querystring";
 
 import cloudinary from "cloudinary";
@@ -419,7 +419,16 @@ export const updateProfilePicture =CatchAsyncError(async(req:Request,res:Respons
 });
 
 
-// delete account
+// get all users ---only for admin
+export const getAllUsers= CatchAsyncError(
+    async(req:Request,res:Response,next:NextFunction) => {
+        try{
+            getAllUsersService(res);
+        }catch(error:any){
+            return next(new ErrorHandler(error.message,400));
+        }
+    }
+);
  
 
 
