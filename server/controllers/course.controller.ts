@@ -29,7 +29,6 @@ export const uploadCourse = CatchAsyncError(async (req: Request, res: Response, 
             }
         }
 
-
         createCourse(data, res, next);
 
     } catch (error: any) {
