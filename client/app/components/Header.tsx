@@ -12,7 +12,7 @@ const Header:FC<Props>=(props) => {
   const [active,setActive] =useState(false);
   const [openSidebar,setOpenSidebar] =useState(false);
   return (
-    <div>Header</div>
+    <div className='w-full relative'></div>
   )
 }
 
